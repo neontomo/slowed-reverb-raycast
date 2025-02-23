@@ -1,9 +1,9 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "slowed-plus-reverb",
-  "title": "slowed + reverb",
-  "description": "turn any audio file into a slowed + reverb version",
-  "icon": "extension-icon.png",
+  "name": "slowed-reverb",
+  "title": "Slowed + Reverb",
+  "description": "Turn any song into a Slowed + Reverb version",
+  "icon": "extension_icon.png",
   "author": "tomo_myrman",
   "categories": [
     "Fun",
@@ -12,15 +12,135 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "index",
-      "title": "slow + reverb song",
-      "subtitle": "slowed + reverb",
-      "description": "turn any audio file into a slowed + reverb version",
+      "name": "generate-slowed",
+      "title": "Generate Slowed Version",
+      "description": "Turn any song into a Slowed version",
+      "mode": "no-view"
+    },
+    {
+      "name": "generate-reverb",
+      "title": "Generate Reverb Version",
+      "description": "Add Reverb to any song",
+      "mode": "no-view"
+    },
+    {
+      "name": "generate-slowed-reverb",
+      "title": "Generate Slowed + Reverb Version",
+      "description": "Turn any song into a Slowed + Reverb version",
+      "mode": "no-view"
+    },
+    {
+      "name": "generate-nightcore",
+      "title": "Generate Nightcore Version",
+      "description": "Turn any song into a Nightcore version",
       "mode": "no-view"
     }
   ],
+  "preferences": [
+    {
+      "name": "customSoxPath",
+      "title": "Custom Sox Path (install with Homebrew first)",
+      "description": "Custom path to Sox",
+      "type": "textfield",
+      "default": "/opt/homebrew/bin/sox",
+      "placeholder": "/opt/homebrew/bin/sox",
+      "required": true
+    },
+    {
+      "name": "defaultSlowedSpeed",
+      "title": "Default Slowed Speed",
+      "description": "Default speed for the Slowed version",
+      "type": "dropdown",
+      "default": "0.8",
+      "required": true,
+      "data": [
+        {
+          "title": "0.1",
+          "value": "0.1"
+        },
+        {
+          "title": "0.2",
+          "value": "0.2"
+        },
+        {
+          "title": "0.3",
+          "value": "0.3"
+        },
+        {
+          "title": "0.4",
+          "value": "0.4"
+        },
+        {
+          "title": "0.5",
+          "value": "0.5"
+        },
+        {
+          "title": "0.6",
+          "value": "0.6"
+        },
+        {
+          "title": "0.7",
+          "value": "0.7"
+        },
+        {
+          "title": "0.8",
+          "value": "0.8"
+        },
+        {
+          "title": "0.9",
+          "value": "0.9"
+        }
+      ]
+    },
+    {
+      "name": "defaultNightcoreSpeed",
+      "title": "Default Nightcore Speed",
+      "description": "Default speed for the Slowed version",
+      "type": "dropdown",
+      "default": "1.2",
+      "required": true,
+      "data": [
+        {
+          "title": "1.1",
+          "value": "1.1"
+        },
+        {
+          "title": "1.2",
+          "value": "1.2"
+        },
+        {
+          "title": "1.3",
+          "value": "1.3"
+        },
+        {
+          "title": "1.4",
+          "value": "1.4"
+        },
+        {
+          "title": "1.5",
+          "value": "1.5"
+        },
+        {
+          "title": "1.6",
+          "value": "1.6"
+        },
+        {
+          "title": "1.7",
+          "value": "1.7"
+        },
+        {
+          "title": "1.8",
+          "value": "1.8"
+        },
+        {
+          "title": "1.9",
+          "value": "1.9"
+        }
+      ]
+    }
+  ],
   "dependencies": {
-    "@raycast/api": "^1.92.0",
+    "@raycast/api": "^1.92.1",
     "@raycast/utils": "^1.17.0"
   },
   "devDependencies": {
@@ -37,7 +157,6 @@
     "dev": "ray develop",
     "fix-lint": "ray lint --fix",
     "lint": "ray lint",
-    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
     "publish": "npx @raycast/api@latest publish"
   }
 }
