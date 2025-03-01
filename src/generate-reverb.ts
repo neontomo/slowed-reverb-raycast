@@ -1,13 +1,17 @@
-import Init from './setup/init'
-import { convertersUtils } from './utils/converters.utils'
-import { errorUtils } from './utils/errors.utils'
+import Init from "./setup/init";
+import { convertersUtils } from "./utils/converters.utils";
+import { errorUtils } from "./utils/errors.utils";
 
 const Reverb = async () => {
-  const converterName = 'reverb'
-  const { successToast } = convertersUtils.converters[converterName]
+  const converterName = "reverb";
+  const { successToast } = convertersUtils.converters[converterName];
 
-  await Init(converterName)
-  await errorUtils.showToastSuccess({ title: successToast.title })
-}
+  try {
+    await Init(converterName);
+    await errorUtils.showToastSuccess({ title: successToast.title });
+  } catch (error) {
+    await errorUtils.showToastError(error);
+  }
+};
 
-export default Reverb
+export default Reverb;

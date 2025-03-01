@@ -102,15 +102,11 @@
     {
       "name": "defaultNightcoreSpeed",
       "title": "Default Nightcore Speed",
-      "description": "Default speed for the Slowed version",
+      "description": "Default speed for the Nightcore version",
       "type": "dropdown",
       "default": "1.2",
       "required": true,
       "data": [
-        {
-          "title": "0.5",
-          "value": "0.5"
-        },
         {
           "title": "1.1",
           "value": "1.1"
@@ -157,8 +153,7 @@
   "license": "MIT",
   "dependencies": {
     "@raycast/api": "^1.92.1",
-    "@raycast/utils": "^1.17.0",
-    "@types/node": "20.8.10"
+    "@raycast/utils": "^1.17.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.11",

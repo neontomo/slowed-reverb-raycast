@@ -1,12 +1,13 @@
-import { execSync } from 'child_process'
-import { preferenceUtils } from './preference.utils'
+import { execSync } from "child_process";
+import { errorUtils } from "./errors.utils";
+import { preferenceUtils } from "./preference.utils";
 
 const getSoxPath = () => {
-  const { getPreference } = preferenceUtils
-  const defaultSoxPath = getPreference('customSoxPath')
+  const { getPreference } = preferenceUtils;
+  const defaultSoxPath = getPreference("customSoxPath");
   const commandFolderPath = execSync(`
   locations=(
-      ${defaultSoxPath}
+     "${defaultSoxPath.replace(/"/g, '"')}"
       /opt/homebrew/bin/sox
       /usr/local/bin/sox
       /usr/bin/sox
@@ -14,7 +15,6 @@ const getSoxPath = () => {
       /usr/sbin/sox
       /sbin/sox
       /opt/X11/bin/sox
-      /usr/local/Cellar/sox
   )
   
   for location in "\${locations[@]}"
@@ -29,18 +29,24 @@ const getSoxPath = () => {
   echo ""
 `)
     .toString()
-    .trim()
+    .trim();
 
-  if (commandFolderPath) return commandFolderPath.replace(/\n/gi, '')
-  return ''
-}
+  if (commandFolderPath) return commandFolderPath.replace(/\n/gi, "");
+  return "";
+};
 
-const isSoxInstalled = () => !!getSoxPath()
+const isSoxInstalled = () => !!getSoxPath();
 
-const executeSoxCommand = (command: string) => execSync(`${getSoxPath()} ${command}`).toString()
+const executeSoxCommand = async (command: string) => {
+  try {
+    execSync(`${getSoxPath()} ${command}`).toString();
+  } catch (error) {
+    await errorUtils.showToastError(error);
+  }
+};
 
 export const soxUtils = {
   getSoxPath,
   isSoxInstalled,
-  executeSoxCommand
-}
+  executeSoxCommand,
+};
